@@ -40,7 +40,7 @@ src/
 └── test/
 ```
 
-## 🛠️ Funcionalidades Implementadas
+## 🛠️ Funcionalidades a serem implementadas
 
 - Representação de componentes como classes que herdam de `Componente`.
 - Compatibilidade entre peças (ex: socket do processador e placa-mãe).
