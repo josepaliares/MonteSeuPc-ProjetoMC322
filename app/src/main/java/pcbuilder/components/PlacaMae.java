@@ -15,8 +15,8 @@ public class PlacaMae extends Componente {
      * @param chipset Chipset da placa-mãe (ex: Intel Z490, AMD B550).
      * @param ramSlots Número de slots de RAM disponíveis na placa-mãe.
      */
-    public PlacaMae(String nome, int preco, String descricao, String imagePath, String soquete, String chipset, int ramSlots) {
-        super(nome, preco, descricao, imagePath);
+    public PlacaMae(String nome, int preco, String descricao, Marca marca, String imagePath, String soquete, String chipset, int ramSlots) {
+        super(nome, preco, descricao, marca, imagePath);
         this.soquete = soquete;
         this.chipset = chipset;
         this.ramSlots = ramSlots;

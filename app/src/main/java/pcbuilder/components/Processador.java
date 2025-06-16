@@ -15,8 +15,8 @@ public class Processador extends Componente {
      * @param nucleos Número de núcleos do processador.
      * @param threads Número de threads do processador.
      */
-    public Processador(String nome, int preco, String descricao, String imagePath, String socket, int nucleos, int threads) {
-        super(nome, preco, descricao, imagePath);
+    public Processador(String nome, int preco, String descricao, Marca marca, String imagePath, String socket, int nucleos, int threads) {
+        super(nome, preco, descricao, marca, imagePath);
         this.socket = socket;
         this.nucleos = nucleos;
         this.threads = threads;

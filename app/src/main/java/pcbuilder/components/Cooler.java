@@ -15,8 +15,8 @@ public class Cooler extends Componente {
      * @param imagePath Caminho da imagem do cooler.
      * @param tipo Tipo de cooler (ex: ventilador, watercooler).
      */
-    public Cooler(String nome, int preco, String descricao, String imagePath, String tipo) {
-        super(nome, preco, descricao, imagePath);
+    public Cooler(String nome, int preco, String descricao, Marca marca, String imagePath, String tipo) {
+        super(nome, preco, descricao, marca, imagePath);
         this.tipo = tipo;
     }
 
