@@ -19,8 +19,8 @@ public class Gabinete extends Componente {
      * @param altura Altura do gabinete em centímetros.
      * @param profundidade Profundidade do gabinete em centímetros.
      */
-    public Gabinete(String nome, int preco, String descricao, String imagePath, int largura, int altura, int profundidade) {
-        super(nome, preco, descricao, imagePath);
+    public Gabinete(String nome, int preco, String descricao, Marca marca, String imagePath, int largura, int altura, int profundidade) {
+        super(nome, preco, descricao, marca, imagePath);
         this.largura = largura;
         this.altura = altura;
         this.profundidade = profundidade;

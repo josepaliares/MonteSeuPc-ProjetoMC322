@@ -15,8 +15,8 @@ public class Fonte extends Componente {
      * @param imagePath Caminho da imagem da fonte.
      * @param potencia Potência da fonte em watts.
      */
-    public Fonte(String nome, int preco, String descricao, String imagePath, int potencia) {
-        super(nome, preco, descricao, imagePath);
+    public Fonte(String nome, int preco, String descricao, Marca marca, String imagePath, int potencia) {
+        super(nome, preco, descricao, marca, imagePath);
         this.potencia = potencia;
     }
 

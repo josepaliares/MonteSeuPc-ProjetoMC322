@@ -13,8 +13,8 @@ public class PlacaDeVideo extends Componente {
      * @param memoria Memória da placa de vídeo em GB.
      * @param chipset Chipset da placa de vídeo (ex: NVIDIA, AMD).
      */
-    public PlacaDeVideo(String nome, int preco, String descricao, String imagePath, int memoria, String chipset) {
-        super(nome, preco, descricao, imagePath);
+    public PlacaDeVideo(String nome, int preco, String descricao, Marca marca, String imagePath, int memoria, String chipset) {
+        super(nome, preco, descricao, marca, imagePath);
         this.memoria = memoria;
         this.chipset = chipset;
     }

@@ -15,8 +15,8 @@ public class MemoriaRAM extends Componente {
      * @param frequencia Frequência da memória RAM em MHz.
      * @param tipo Tipo de memória RAM (ex: DDR4, DDR5).
      */
-    public MemoriaRAM(String nome, int preco, String descricao, String imagePath, int capacidade, int frequencia, String tipo) {
-        super(nome, preco, descricao, imagePath);
+    public MemoriaRAM(String nome, int preco, String descricao, Marca marca, String imagePath, int capacidade, int frequencia, String tipo) {
+        super(nome, preco, descricao, marca, imagePath);
         this.capacidade = capacidade;
         this.frequencia = frequencia;
         this.tipo = tipo;

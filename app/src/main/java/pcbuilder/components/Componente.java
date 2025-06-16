@@ -1,8 +1,5 @@
 package pcbuilder.components;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  * Clase abstrata que representa un componente genérico.
  */
@@ -10,6 +7,7 @@ public abstract class Componente {
     private String nome;
     private int preco; // Preço em centavos
     private String descricao;
+    private Marca marca; // Por simplicidade todos os componentes compartilham marcas
     private String imagePath;
     
    /**
@@ -17,12 +15,14 @@ public abstract class Componente {
     * @param nome Nome do componente.
     * @param preco Preço do componente em centavos. 
     * @param descricao Descrição do componente.
+    * @param marca Marca do componente
     * @param imagePath Caminho da imagem do componente.
     */
-    public Componente(String nome, int preco, String descricao, String imagePath) {
+    public Componente(String nome, int preco, String descricao, Marca marca, String imagePath) {
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
+        this.marca = marca;
         this.imagePath = imagePath;
     }
 
@@ -50,6 +50,14 @@ public abstract class Componente {
      */
     public String getDescricao() {
         return descricao;
+    }
+
+    /**
+     * Retorna a marca do componente.
+     * @return Marca do componente.
+     */
+    public Marca getMarca(){
+        return marca;
     }
 
     /**
