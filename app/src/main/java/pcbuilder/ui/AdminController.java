@@ -24,6 +24,7 @@ public class AdminController {
     private final GabineteService    gabSvc       = new GabineteService();
     private final CoolerService      coolerSvc    = new CoolerService();
     private final MemoriaRAMService  memSvc       = new MemoriaRAMService();
+    private final SSDNVMEService      ssdSvc       = new SSDNVMEService();
 
     // --- Fontes ---
     @FXML private TableView<Fonte>        tvFontes;
@@ -37,7 +38,7 @@ public class AdminController {
     @FXML private TableView<PlacaMae>        tvPlacasMae;
     @FXML private TableColumn<PlacaMae,String>  colMaeNome;
     @FXML private TableColumn<PlacaMae,Integer> colMaePreco;
-    @FXML private TableColumn<PlacaMae,String>  colMaeSoquete;
+    @FXML private TableColumn<PlacaMae,String>  colMaeSocket;
     @FXML private TableColumn<PlacaMae,String>  colMaeChipset;
     @FXML private TableColumn<PlacaMae,Integer> colMaeSlots;
 
@@ -77,6 +78,15 @@ public class AdminController {
     @FXML private TableColumn<MemoriaRAM,Integer> colMemCapacidade;
     @FXML private TableColumn<MemoriaRAM,Integer> colMemFrequencia;
 
+    // --- SSD NVME ---
+    @FXML private TableView<SSDNVME> tvSSDs;
+    @FXML private TableColumn<SSDNVME,String>  colSSDNome;
+    @FXML private TableColumn<SSDNVME,Integer> colSSDPreco;
+    // @FXML private TableColumn<SSDNVME,String>  colSSDDesc;
+    @FXML private TableColumn<SSDNVME,Marca>   colSSDMarca;
+    @FXML private TableColumn<SSDNVME,Integer> colSSDCapacidade;
+    @FXML private TableColumn<SSDNVME,Integer> colSSDLength;
+
     @FXML
     public void initialize() {
         // CONFIGURAÇÃO DAS COLUNAS E CARREGAMENTO INICIAL
@@ -91,7 +101,7 @@ public class AdminController {
         // Placas-Mãe
         colMaeNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colMaePreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        colMaeSoquete.setCellValueFactory(new PropertyValueFactory<>("soquete"));
+        colMaeSocket.setCellValueFactory(new PropertyValueFactory<>("socket"));
         colMaeChipset.setCellValueFactory(new PropertyValueFactory<>("chipset"));
         colMaeSlots.setCellValueFactory(new PropertyValueFactory<>("ramSlots"));
         loadPlacasMae();
@@ -131,6 +141,15 @@ public class AdminController {
         colMemCapacidade.setCellValueFactory(new PropertyValueFactory<>("capacidade"));
         colMemFrequencia.setCellValueFactory(new PropertyValueFactory<>("frequencia"));
         loadMemorias();
+
+        // SSDs NVME
+        colSSDNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colSSDPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        // colSSDDesc.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colSSDMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colSSDCapacidade.setCellValueFactory(new PropertyValueFactory<>("capacidade"));
+        colSSDLength.setCellValueFactory(new PropertyValueFactory<>("length"));
+        loadSSDs();
     }
 
     // ---- Métodos de recarga ----
@@ -154,6 +173,9 @@ public class AdminController {
     }
     private void loadMemorias() {
         tvMemorias.setItems(FXCollections.observableArrayList(memSvc.buscarTodos()));
+    }
+    private void loadSSDs() {
+        tvSSDs.setItems(FXCollections.observableArrayList(ssdSvc.buscarTodos()));
     }
 
     // ---- Fontes ----
@@ -402,6 +424,38 @@ public class AdminController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // ---- SSDs NVME ----
+    @FXML private void onNewSSD() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/fxml/SSDNVMEFormView.fxml")
+        );
+        Parent form = loader.load();
+        SSDNVMEFormController ctrl = loader.getController();
+        ctrl.setService(ssdSvc);
+        showDialog(form, "Novo SSD NVMe");
+        loadSSDs();
+    }
+    @FXML private void onEditSSD() throws IOException {
+        SSDNVME sel = tvSSDs.getSelectionModel().getSelectedItem();
+        if (sel == null) return;
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/fxml/SSDNVMEFormView.fxml")
+        );
+        Parent form = loader.load();
+        SSDNVMEFormController ctrl = loader.getController();
+        ctrl.setService(ssdSvc);
+        ctrl.setSSDNVME(sel);
+        showDialog(form, "Editar SSD NVMe");
+        loadSSDs();
+    }
+    @FXML private void onDeleteSSD() {
+        SSDNVME sel = tvSSDs.getSelectionModel().getSelectedItem();
+        if (sel != null) {
+            ssdSvc.excluir(sel.getNome());
+            loadSSDs();
         }
     }
     

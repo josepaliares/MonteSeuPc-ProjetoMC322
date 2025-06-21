@@ -20,7 +20,7 @@ public class CoolerService extends ComponenteService<Cooler> {
             storage.add(
                 ComponenteFactory.criarCooler(
                     "Cooler Master Hyper 212",
-                    250,
+                    25000,
                     "Cooler a ar com quatro heatpipes",
                     Marca.AMD,
                     "/images/cooler_hyper212.png",

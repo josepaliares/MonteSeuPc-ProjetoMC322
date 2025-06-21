@@ -80,4 +80,9 @@ public class PlacaMae extends Componente {
     public int getSSDMaxLength() {
         return ssdMaxLength;
     }
+
+    // public String getSoquete() {
+    //     return getSocket();
+    // }
+
 }

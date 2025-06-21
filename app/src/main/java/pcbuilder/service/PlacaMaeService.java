@@ -26,7 +26,10 @@ public class PlacaMaeService extends ComponenteService<PlacaMae> {
                     "/images/prime_z490.png",
                     "LGA1200",
                     "Z490",
-                    4
+                    4,
+                    16,        
+                    "DDR4",    
+                    120    
                 )
             );
             storage.add(
@@ -38,7 +41,9 @@ public class PlacaMaeService extends ComponenteService<PlacaMae> {
                     "/images/b550_tomahawk.png",
                     "AM4",
                     "B550",
-                    4
+                    4,32,        
+                    "DDR5",    
+                    240    
                 )
             );
             storage.add(
@@ -50,7 +55,10 @@ public class PlacaMaeService extends ComponenteService<PlacaMae> {
                     "/images/z690_aorus.png",
                     "LGA1700",
                     "Z690",
-                    4
+                    4,
+                    16,        
+                    "DDR4",    
+                    120      
                 )
             );
             salvarEmJson();

@@ -14,13 +14,17 @@ public class PlacaMaeFormController {
     @FXML private TextField tfPreco;
     @FXML private TextField tfDesc;
     @FXML private ChoiceBox<Marca> cbMarca;
-    @FXML private TextField tfSoquete;
+    @FXML private TextField tfSocket;
     @FXML private TextField tfChipset;
     @FXML private TextField tfSlots;
+    @FXML private TextField tfRamSizePerSlot;
+    @FXML private TextField tfRamType;
+    @FXML private TextField tfSSDMaxLength;
 
     private PlacaMaeService service;
-    private PlacaMae placaMae;          
-    private String nomeOriginal = null;  
+    private PlacaMae placaMae;
+    private String nomeOriginal = null;
+
     public void setService(PlacaMaeService svc) {
         this.service = svc;
     }
@@ -38,9 +42,12 @@ public class PlacaMaeFormController {
             tfPreco.setText(String.valueOf(p.getPreco()));
             tfDesc.setText(p.getDescricao());
             cbMarca.setValue(p.getMarca());
-            tfSoquete.setText(p.getSoquete());
+            tfSocket.setText(p.getSocket());
             tfChipset.setText(p.getChipset());
             tfSlots.setText(String.valueOf(p.getRamSlots()));
+            tfRamSizePerSlot.setText(String.valueOf(p.getRamSizePerSlot()));
+            tfRamType.setText(p.getRamType());
+            tfSSDMaxLength.setText(String.valueOf(p.getSSDMaxLength()));
         }
     }
 
@@ -51,9 +58,12 @@ public class PlacaMaeFormController {
             int preco      = Integer.parseInt(tfPreco.getText().trim());
             String desc    = tfDesc.getText().trim();
             Marca marca    = cbMarca.getValue();
-            String soquete = tfSoquete.getText().trim();
+            String socket = tfSocket.getText().trim();
             String chipset = tfChipset.getText().trim();
             int slots      = Integer.parseInt(tfSlots.getText().trim());
+            int ramSizePerSlot = Integer.parseInt(tfRamSizePerSlot.getText().trim());
+            String ramType = tfRamType.getText().trim();
+            int ssdMaxLength = Integer.parseInt(tfSSDMaxLength.getText().trim());
 
             if (nome.isEmpty() || marca == null) {
                 throw new IllegalArgumentException("Nome e marca são obrigatórios.");
@@ -64,14 +74,14 @@ public class PlacaMaeFormController {
             }
 
             PlacaMae pm = ComponenteFactory.criarPlacaMae(
-                nome, preco, desc, marca, "", soquete, chipset, slots
+                nome, preco, desc, marca, "", socket, chipset, slots, ramSizePerSlot, ramType, ssdMaxLength
             );
 
             service.salvarOuAtualizar(pm);
             close();
         } catch (NumberFormatException e) {
             new Alert(Alert.AlertType.ERROR,
-                "Valores numéricos inválidos em preço ou slots.")
+                "Valores numéricos inválidos em preço, slots, tamanho de RAM ou comprimento do SSD.")
                 .showAndWait();
         } catch (Exception ex) {
             new Alert(Alert.AlertType.ERROR,

@@ -38,17 +38,23 @@
   <ListView fx:id="lvMemorias"    GridPane.rowIndex="6" GridPane.columnIndex="1"
             prefHeight="80"/>
 
-  <!-- Linha 7: Botão Montar -->
+  <!-- Linha 7: SSD NVMe -->
+  <Label text="SSD NVMe:"         GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbSSD"         GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+  <!-- Linha 8: Botões -->
   <Button text="Montar PC"
           onAction="#onMontar"
-          GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-  <Region                         GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+          GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+  <Button text="Limpar Seleções"
+          onAction="#onLimpar"
+          GridPane.rowIndex="8" GridPane.columnIndex="1"/>
 
-  <!-- Linha 8: Resumo -->
+  <!-- Linha 9: Resumo -->
   <TextArea fx:id="taResumo"
             editable="false"
             prefRowCount="6"
-            GridPane.rowIndex="8"
+            GridPane.rowIndex="9"
             GridPane.columnIndex="0"
             GridPane.columnSpan="2"/>
 </GridPane>

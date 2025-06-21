@@ -58,7 +58,7 @@
                 <columns>
                   <TableColumn text="Nome"     fx:id="colMaeNome"/>
                   <TableColumn text="Preço"    fx:id="colMaePreco"/>
-                  <TableColumn text="Soquete"  fx:id="colMaeSoquete"/>
+                  <TableColumn text="Socket"  fx:id="colMaeSocket"/>
                   <TableColumn text="Chipset"  fx:id="colMaeChipset"/>
                   <TableColumn text="Slots RAM" fx:id="colMaeSlots"/>
                 </columns>
@@ -160,6 +160,31 @@
           </BorderPane>
         </Tab>
 
+        <!-- SSD NVMe -->
+        <Tab text="SSD NVMe" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewSSD"/>
+                <Button text="Editar"  onAction="#onEditSSD"/>
+                <Button text="Excluir" onAction="#onDeleteSSD"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvSSDs">
+                <columns>
+                  <TableColumn text="Nome"       fx:id="colSSDNome"/>
+                  <TableColumn text="Preço"      fx:id="colSSDPreco"/>
+                  <TableColumn text="Capacidade" fx:id="colSSDCapacidade"/>
+                  <TableColumn text="Comprimento" fx:id="colSSDLength"/>
+                  <TableColumn text="Marca"      fx:id="colSSDMarca"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+
         <!-- Memórias RAM -->
         <Tab text="Memórias RAM" closable="false">
           <BorderPane>
@@ -186,3 +211,5 @@
     </TabPane>
   </center>
 </BorderPane>
+
+
