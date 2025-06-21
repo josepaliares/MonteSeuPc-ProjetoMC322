@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pcbuilder.ui.FonteFormController"
+          hgap="8" vgap="8" style="-fx-padding:10;">
+    <Label text="Nome:"           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfNome"     GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Preço (R$):"     GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfPreco"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Descrição:"      GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfDesc"     GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Marca:"          GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <ChoiceBox fx:id="cbMarca"    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Potência (W):"   GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfPotencia" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Button text="Salvar"   onAction="#onSave"
+            GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <Button text="Cancelar" onAction="#onCancel"
+            GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+</GridPane>

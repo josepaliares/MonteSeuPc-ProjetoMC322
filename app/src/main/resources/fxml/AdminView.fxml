@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pcbuilder.ui.AdminController"
+            prefWidth="800" prefHeight="600">
+
+  <!-- Top: logout e título central -->
+  <top>
+    <ToolBar>
+      <Button text="Logout" onAction="#onLogout"/>
+      <Region fx:id="spacer" BorderPane.alignment="CENTER"/>
+      <Label text="Administração" style="-fx-font-size:16px;"/>
+    </ToolBar>
+  </top>
+
+  <center>
+    <TabPane>
+      <tabs>
+        <!-- Fontes -->
+        <Tab text="Fontes" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewFonte"/>
+                <Button text="Editar"  onAction="#onEditFonte"/>
+                <Button text="Excluir" onAction="#onDeleteFonte"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvFontes">
+                <columns>
+                  <TableColumn text="Nome"      fx:id="colFonteNome"/>
+                  <TableColumn text="Preço"     fx:id="colFontePreco"/>
+                  <TableColumn text="Descrição" fx:id="colFonteDesc"/>
+                  <TableColumn text="Marca"     fx:id="colFonteMarca"/>
+                  <TableColumn text="Potência"  fx:id="colFontePot"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Placas-Mãe -->
+        <Tab text="Placas-Mãe" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewPlacaMae"/>
+                <Button text="Editar"  onAction="#onEditPlacaMae"/>
+                <Button text="Excluir" onAction="#onDeletePlacaMae"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvPlacasMae">
+                <columns>
+                  <TableColumn text="Nome"     fx:id="colMaeNome"/>
+                  <TableColumn text="Preço"    fx:id="colMaePreco"/>
+                  <TableColumn text="Soquete"  fx:id="colMaeSoquete"/>
+                  <TableColumn text="Chipset"  fx:id="colMaeChipset"/>
+                  <TableColumn text="Slots RAM" fx:id="colMaeSlots"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Placas de Vídeo -->
+        <Tab text="Placas de Vídeo" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewPlacaVideo"/>
+                <Button text="Editar"  onAction="#onEditPlacaVideo"/>
+                <Button text="Excluir" onAction="#onDeletePlacaVideo"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvPlacasVideo">
+                <columns>
+                  <TableColumn text="Nome"    fx:id="colVidNome"/>
+                  <TableColumn text="Preço"   fx:id="colVidPreco"/>
+                  <TableColumn text="Memória" fx:id="colVidMemoria"/>
+                  <TableColumn text="Chipset" fx:id="colVidChipset"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Processadores -->
+        <Tab text="Processadores" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewProcessador"/>
+                <Button text="Editar"  onAction="#onEditProcessador"/>
+                <Button text="Excluir" onAction="#onDeleteProcessador"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvProcessadores">
+                <columns>
+                  <TableColumn text="Nome"    fx:id="colProcNome"/>
+                  <TableColumn text="Preço"   fx:id="colProcPreco"/>
+                  <TableColumn text="Socket"  fx:id="colProcSocket"/>
+                  <TableColumn text="Núcleos" fx:id="colProcNucleos"/>
+                  <TableColumn text="Threads" fx:id="colProcThreads"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Gabinetes -->
+        <Tab text="Gabinetes" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewGabinete"/>
+                <Button text="Editar"  onAction="#onEditGabinete"/>
+                <Button text="Excluir" onAction="#onDeleteGabinete"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvGabinetes">
+                <columns>
+                  <TableColumn text="Nome"      fx:id="colGabNome"/>
+                  <TableColumn text="Preço"     fx:id="colGabPreco"/>
+                  <TableColumn text="Altura"    fx:id="colGabAltura"/>
+                  <TableColumn text="Largura"   fx:id="colGabLargura"/>
+                  <TableColumn text="Profund."  fx:id="colGabProfund"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Coolers -->
+        <Tab text="Coolers" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewCooler"/>
+                <Button text="Editar"  onAction="#onEditCooler"/>
+                <Button text="Excluir" onAction="#onDeleteCooler"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvCoolers">
+                <columns>
+                  <TableColumn text="Nome"     fx:id="colCoolNome"/>
+                  <TableColumn text="Preço"    fx:id="colCoolPreco"/>
+                  <TableColumn text="Tipo"     fx:id="colCoolTipo"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+
+        <!-- Memórias RAM -->
+        <Tab text="Memórias RAM" closable="false">
+          <BorderPane>
+            <top>
+              <ToolBar>
+                <Button text="Novo"    onAction="#onNewMemoria"/>
+                <Button text="Editar"  onAction="#onEditMemoria"/>
+                <Button text="Excluir" onAction="#onDeleteMemoria"/>
+              </ToolBar>
+            </top>
+            <center>
+              <TableView fx:id="tvMemorias">
+                <columns>
+                  <TableColumn text="Nome"       fx:id="colMemNome"/>
+                  <TableColumn text="Preço"      fx:id="colMemPreco"/>
+                  <TableColumn text="Capacidade" fx:id="colMemCapacidade"/>
+                  <TableColumn text="Frequência" fx:id="colMemFrequencia"/>
+                </columns>
+              </TableView>
+            </center>
+          </BorderPane>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

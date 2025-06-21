@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>    
+<?import javafx.scene.layout.*?>    
+
+<TabPane xmlns:fx="http://javafx.com/fxml"
+         fx:controller="pcbuilder.ui.MainWindowController"
+         prefWidth="800" prefHeight="600">
+
+  <tabs>
+
+    <!-- Aba de Usuários -->
+    <Tab text="Usuários">
+      <content>
+        <BorderPane>
+
+          <!-- Toolbar compartilhada -->
+          <top>
+            <ToolBar>
+              <Button text="Novo"          onAction="#onNewUser"/>
+              <Button text="Editar"        onAction="#onEditUser"/>
+              <Button text="Excluir"       onAction="#onDeleteUser"/>
+              <Button text="Montagem PC"   onAction="#onMontagem"/>
+              <Region HBox.hgrow="ALWAYS"/>
+              <TextField fx:id="tfSearch"
+                         promptText="Buscar por username ou e-mail"
+                         prefWidth="200"/>
+              <Button text="Buscar" onAction="#onSearch"/>
+            </ToolBar>
+          </top>
+
+          <!-- Tabela de Usuários -->
+          <center>
+            <TableView fx:id="tvUsers"
+                       prefWidth="780" prefHeight="500">
+              <columns>
+                <TableColumn text="Username"
+                             fx:id="colUsername"
+                             prefWidth="250"/>
+                <TableColumn text="E-mail"
+                             fx:id="colEmail"
+                             prefWidth="450"/>
+              </columns>
+            </TableView>
+          </center>
+
+          <!-- Contador de Usuários -->
+          <bottom>
+            <HBox spacing="8" style="-fx-padding:8;">
+              <Label text="Total de usuários:"/>
+              <Label fx:id="lblCount" text="0"/>
+            </HBox>
+          </bottom>
+
+        </BorderPane>
+      </content>
+    </Tab>
+
+    <!-- Aba de Montagem de PC -->
+    <Tab text="Montagem PC">
+      <content>
+        <fx:include source="MontagemView.fxml"/>
+      </content>
+    </Tab>
+
+  </tabs>
+</TabPane>

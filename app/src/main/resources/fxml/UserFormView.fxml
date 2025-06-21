@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>        
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="pcbuilder.ui.UserFormController"
+      spacing="10">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <TextField fx:id="tfNome"    promptText="Username"/>
+    <TextField fx:id="tfEmail"   promptText="E-mail"/>
+    <PasswordField fx:id="pfSenha"   promptText="Senha"/>
+    <PasswordField fx:id="pfConfirm" promptText="Confirme a senha"/>
+
+    <HBox spacing="10">
+        <Button text="Cancelar" onAction="#onCancel"/>
+        <Button text="Salvar"   onAction="#onSave"/>
+    </HBox>
+</VBox>
