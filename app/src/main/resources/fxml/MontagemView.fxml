@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pcbuilder.ui.MontagemController"
+          hgap="10" vgap="10"
+          style="-fx-padding: 10;">
+
+  <!-- Linha 0: Fonte -->
+  <Label text="Fonte:"           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbFonte"      GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+  <!-- Linha 1: Placa-Mãe -->
+  <Label text="Placa-Mãe:"        GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbPlacaMae"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+  <!-- Linha 2: Vídeo (opcional) -->
+  <Label text="Vídeo (opcional):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbPlacaVideo"  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+  <!-- Linha 3: Processador -->
+  <Label text="Processador:"      GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbProcessador" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+  <!-- Linha 4: Gabinete -->
+  <Label text="Gabinete:"         GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbGabinete"    GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+  <!-- Linha 5: Coolers (multi-select) -->
+  <Label text="Coolers:"          GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+  <ListView fx:id="lvCoolers"     GridPane.rowIndex="5" GridPane.columnIndex="1"
+            prefHeight="80"/>
+
+  <!-- Linha 6: Memórias RAM (multi-select) -->
+  <Label text="Memórias RAM:"     GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+  <ListView fx:id="lvMemorias"    GridPane.rowIndex="6" GridPane.columnIndex="1"
+            prefHeight="80"/>
+
+  <!-- Linha 7: SSD NVMe -->
+  <Label text="SSD NVMe:"         GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+  <ComboBox fx:id="cbSSD"         GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+  <!-- Linha 8: Botões -->
+  <Button text="Montar PC"
+          onAction="#onMontar"
+          GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+  <Button text="Limpar Seleções"
+          onAction="#onLimpar"
+          GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+  <!-- Linha 9: Resumo -->
+  <TextArea fx:id="taResumo"
+            editable="false"
+            prefRowCount="6"
+            GridPane.rowIndex="9"
+            GridPane.columnIndex="0"
+            GridPane.columnSpan="2"/>
+</GridPane>

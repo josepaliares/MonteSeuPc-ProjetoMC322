@@ -1,3 +1,3 @@
 package pcbuilder.components;
 
-enum Marca{INTEL, AMD, NVIDIA}
+public enum Marca{INTEL, AMD, NVIDIA, KINGSTON, SAMSUNG}

@@ -12,6 +12,11 @@ public class Usuario {
     private String senha; // emai e senha podem ser uma interface login se quiserem
     private ComputadorBuilder builder;
     private Computador computador;
+    private Role role; 
+
+    public Usuario() {
+        this.builder = new ComputadorBuilder();
+    }
 
     /**
      * Construtor da classe Usuário
@@ -19,10 +24,11 @@ public class Usuario {
      * @param email Email do usuário
      * @param senha Senha do usuário
      */
-    public Usuario(String username, String email, String senha){
+    public Usuario(String username, String email, String senha, Role role) {
         this.username = username;
         this.email = email;
         this.senha = senha;
+        this.role = role;
         this.builder = new ComputadorBuilder();
     }
 
@@ -123,5 +129,25 @@ public class Usuario {
      */
     public Computador getComputador(){
         return computador;
+    }
+
+    public void setUsername(String username) {
+    this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+     public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
