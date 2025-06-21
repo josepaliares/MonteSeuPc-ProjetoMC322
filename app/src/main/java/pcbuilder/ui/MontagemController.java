@@ -1,6 +1,7 @@
 package pcbuilder.ui;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import pcbuilder.computador.Computador;
@@ -8,250 +9,372 @@ import pcbuilder.computador.ComputadorBuilder;
 import pcbuilder.components.*;
 import pcbuilder.service.*;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class MontagemController {
 
-    @FXML private ComboBox<Fonte> cbFonte;
-    @FXML private ComboBox<PlacaMae> cbPlacaMae;
-    @FXML private ComboBox<PlacaDeVideo> cbPlacaVideo;
     @FXML private ComboBox<Processador> cbProcessador;
-    @FXML private ComboBox<Gabinete> cbGabinete;
-    @FXML private ComboBox<SSDNVME> cbSSD;
-    @FXML private ListView<Cooler> lvCoolers;
+    @FXML private ComboBox<PlacaMae> cbPlacaMae;
     @FXML private ListView<MemoriaRAM> lvMemorias;
-    @FXML private TextArea taResumo;
+    @FXML private ComboBox<PlacaDeVideo> cbPlacaVideo;
+    @FXML private ComboBox<SSDNVME> cbSSD;
+    @FXML private ComboBox<Gabinete> cbGabinete;
+    @FXML private ComboBox<Fonte> cbFonte;
+    @FXML private ListView<Cooler> lvCoolers;
+    @FXML private ListView<String> lvResumo;
+    @FXML private Label lbAlertaCompatibilidade;
+    @FXML private Label lbPrecoTotal;
+    @FXML private Spinner<Integer> spQuantidadeMemoria;
+    @FXML private Spinner<Integer> spQuantidadeCooler;
 
-    private final FonteService        fonteSvc    = new FonteService();
-    private final PlacaMaeService     placaMaeSvc = new PlacaMaeService();
+    @FXML private TextArea taDescricao;
+
+    private final FonteService fonteSvc = new FonteService();
+    private final PlacaMaeService placaMaeSvc = new PlacaMaeService();
     private final PlacaDeVideoService placaVidSvc = new PlacaDeVideoService();
-    private final ProcessadorService  procSvc     = new ProcessadorService();
-    private final GabineteService     gabSvc      = new GabineteService();
-    private final SSDNVMEService      ssdSvc      = new SSDNVMEService();
-    private final CoolerService       coolerSvc   = new CoolerService();
-    private final MemoriaRAMService   ramSvc      = new MemoriaRAMService();
+    private final ProcessadorService procSvc = new ProcessadorService();
+    private final GabineteService gabSvc = new GabineteService();
+    private final SSDNVMEService ssdSvc = new SSDNVMEService();
+    private final CoolerService coolerSvc = new CoolerService();
+    private final MemoriaRAMService ramSvc = new MemoriaRAMService();
 
     private final Compativel compat = new Compativel();
+    private ObservableList<String> resumoList = FXCollections.observableArrayList();
+    private final Map<MemoriaRAM, Integer> memoriaSelecionada = new LinkedHashMap<>();
+    private final Map<Cooler, Integer> coolerSelecionado = new LinkedHashMap<>();
 
     @FXML
-    public void initialize() {  
-        cbFonte.setItems(FXCollections.observableArrayList(fonteSvc.buscarTodos()));
+    public void initialize() {
+        cbProcessador.setItems(FXCollections.observableArrayList(procSvc.buscarTodos()));
         cbPlacaMae.setItems(FXCollections.observableArrayList(placaMaeSvc.buscarTodos()));
         cbPlacaVideo.setItems(FXCollections.observableArrayList(placaVidSvc.buscarTodos()));
-        cbProcessador.setItems(FXCollections.observableArrayList(procSvc.buscarTodos()));
         cbGabinete.setItems(FXCollections.observableArrayList(gabSvc.buscarTodos()));
+        cbFonte.setItems(FXCollections.observableArrayList(fonteSvc.buscarTodos()));
         cbSSD.setItems(FXCollections.observableArrayList(ssdSvc.buscarTodos()));
-
-        lvCoolers.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvCoolers.setItems(FXCollections.observableArrayList(coolerSvc.buscarTodos()));
-        lvMemorias.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvMemorias.setItems(FXCollections.observableArrayList(ramSvc.buscarTodos()));
 
-        cbFonte.setCellFactory(lv -> new ListCell<Fonte>() {
-            @Override
-            protected void updateItem(Fonte item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                }
-            }
-        });
-        cbFonte.setButtonCell(cbFonte.getCellFactory().call(null));
+        lvCoolers.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        lvMemorias.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        cbPlacaMae.setCellFactory(lv -> new ListCell<PlacaMae>() {
-            @Override
-            protected void updateItem(PlacaMae item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                }
-            }
-        });
-        cbPlacaMae.setButtonCell(cbPlacaMae.getCellFactory().call(null));
+        if (spQuantidadeMemoria != null) {
+            spQuantidadeMemoria.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1));
+        }
+        if (spQuantidadeCooler != null) {
+            spQuantidadeCooler.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1));
+        }
 
-        cbPlacaVideo.setCellFactory(lv -> new ListCell<PlacaDeVideo>() {
-            @Override
-            protected void updateItem(PlacaDeVideo item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                }
-            }
-        });
-        cbPlacaVideo.setButtonCell(cbPlacaVideo.getCellFactory().call(null));
+        setCellFactories();
 
-        cbProcessador.setCellFactory(lv -> new ListCell<Processador>() {
-            @Override
-            protected void updateItem(Processador item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                    PlacaMae placaMae = cbPlacaMae.getValue();
-                    if (placaMae != null && compat.compativel(item, placaMae)) {
-                        setStyle("-fx-background-color: #b7fcb7;");
-                    } else {
-                        setStyle("");
-                    }
-                }
-            }
-        });
-        cbProcessador.setButtonCell(cbProcessador.getCellFactory().call(null));
+        cbProcessador.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        cbPlacaMae.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        cbPlacaVideo.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        cbGabinete.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        cbFonte.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        cbSSD.valueProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        lvCoolers.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
+        lvMemorias.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> atualizarDescricao(newVal));
 
-        cbGabinete.setCellFactory(lv -> new ListCell<Gabinete>() {
-            @Override
-            protected void updateItem(Gabinete item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                }
-            }
-        });
-        cbGabinete.setButtonCell(cbGabinete.getCellFactory().call(null));
-
-        cbSSD.setCellFactory(lv -> new ListCell<SSDNVME>() {
-            @Override
-            protected void updateItem(SSDNVME item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                    PlacaMae placaMae = cbPlacaMae.getValue();
-                    if (placaMae != null && compat.compativel(placaMae, item)) {
-                        setStyle("-fx-background-color: #b7fcb7;");
-                    } else {
-                        setStyle("");
-                    }
-                }
-            }
-        });
-        cbSSD.setButtonCell(cbSSD.getCellFactory().call(null));
-
-        lvCoolers.setCellFactory(lv -> new ListCell<Cooler>() {
-            @Override
-            protected void updateItem(Cooler item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                }
-            }
-        });
-
-        lvMemorias.setCellFactory(lv -> new ListCell<MemoriaRAM>() {
-            @Override
-            protected void updateItem(MemoriaRAM item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(item.getNome() + " (R$ " + String.format("%.2f", item.getPreco() / 100.0) + ")");
-                    PlacaMae placaMae = cbPlacaMae.getValue();
-                    if (placaMae != null && compat.compativel(placaMae, item)) {
-                        setStyle("-fx-background-color: #b7fcb7;");
-                    } else {
-                        setStyle("");
-                    }
-                }
-            }
-        });
-
-        cbPlacaMae.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            lvMemorias.refresh();
-            cbProcessador.setButtonCell(cbProcessador.getCellFactory().call(null));
-            cbSSD.setButtonCell(cbSSD.getCellFactory().call(null));
-        });
-
-        cbProcessador.valueProperty().addListener((obs, oldVal, newVal) -> {
-            PlacaMae placaMae = cbPlacaMae.getValue();
-            if (placaMae != null && newVal != null && !compat.compativel(newVal, placaMae)) {
-                alertaIncompatibilidade("Processador", "Atenção: o processador selecionado NÃO é compatível com a placa-mãe!");
-            }
-        });
+        cbProcessador.setOnAction(e -> { onProcessadorSelecionado(); atualizarResumo(); });
+        cbPlacaMae.setOnAction(e -> { onPlacaMaeSelecionada(); atualizarResumo(); });
+        cbPlacaVideo.setOnAction(e -> atualizarResumo());
+        cbSSD.setOnAction(e -> atualizarResumo());
+        cbGabinete.setOnAction(e -> atualizarResumo());
+        cbFonte.setOnAction(e -> atualizarResumo());
 
         cbSSD.valueProperty().addListener((obs, oldVal, newVal) -> {
             PlacaMae placaMae = cbPlacaMae.getValue();
             if (placaMae != null && newVal != null && !compat.compativel(placaMae, newVal)) {
-                alertaIncompatibilidade("SSD NVMe", "Atenção: o SSD NVMe selecionado NÃO é compatível com a placa-mãe!");
+                setAlerta("SSD NVMe selecionado NÃO é compatível com a placa-mãe!");
+            } else {
+                setAlerta("");
             }
         });
-
         lvMemorias.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             PlacaMae placaMae = cbPlacaMae.getValue();
             if (placaMae != null && newVal != null && !compat.compativel(placaMae, newVal)) {
-                alertaIncompatibilidade("Memória RAM", "Atenção: a memória RAM selecionada NÃO é compatível com a placa-mãe!");
+                setAlerta("Memória RAM selecionada NÃO é compatível com a placa-mãe!");
+            } else {
+                setAlerta("");
             }
         });
+
+        cbPlacaMae.setDisable(true);
+        lvMemorias.setDisable(true);
+        cbSSD.setDisable(true);
+
+        lvResumo.setItems(resumoList);
+
+        lbAlertaCompatibilidade.setText("");
+        lbPrecoTotal.setText("");
+        taDescricao.setText("");
+    }
+
+    private void setCellFactories() {
+        cbProcessador.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(Processador item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbProcessador.setButtonCell(cbProcessador.getCellFactory().call(null));
+        cbPlacaMae.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(PlacaMae item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbPlacaMae.setButtonCell(cbPlacaMae.getCellFactory().call(null));
+        cbPlacaVideo.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(PlacaDeVideo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbPlacaVideo.setButtonCell(cbPlacaVideo.getCellFactory().call(null));
+        cbGabinete.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(Gabinete item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbGabinete.setButtonCell(cbGabinete.getCellFactory().call(null));
+        cbFonte.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(Fonte item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbFonte.setButtonCell(cbFonte.getCellFactory().call(null));
+        cbSSD.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(SSDNVME item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        }); cbSSD.setButtonCell(cbSSD.getCellFactory().call(null));
+        lvCoolers.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(Cooler item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        });
+        lvMemorias.setCellFactory(lv -> new ListCell<>() {
+            @Override protected void updateItem(MemoriaRAM item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome() + " (R$ " + formatarPreco(item.getPreco()) + ")");
+            }
+        });
+    }
+
+    private String formatarPreco(int precoCentavos) {
+        return String.format("%.2f", precoCentavos / 100.0);
+    }
+
+    private void atualizarDescricao(Object item) {
+        if (item == null) {
+            taDescricao.setText("");
+        } else if (item instanceof Componente) {
+            taDescricao.setText(((Componente) item).getDescricao());
+        } else {
+            taDescricao.setText("");
+        }
+    }
+
+    @FXML
+    private void onProcessadorSelecionado() {
+        Processador proc = cbProcessador.getValue();
+        if (proc != null) {
+            cbPlacaMae.setDisable(false);
+            cbPlacaMae.setItems(FXCollections.observableArrayList(
+                placaMaeSvc.buscarTodos().stream()
+                    .filter(m -> compat.compativel(proc, m))
+                    .toList()
+            ));
+            cbPlacaMae.getSelectionModel().clearSelection();
+            lvMemorias.setDisable(true);
+            cbSSD.setDisable(true);
+            setAlerta("");
+            atualizarResumo();
+        }
+    }
+
+    @FXML
+    private void onPlacaMaeSelecionada() {
+        PlacaMae placaMae = cbPlacaMae.getValue();
+        if (placaMae != null) {
+            lvMemorias.setDisable(false);
+            cbSSD.setDisable(false);
+
+            lvMemorias.setItems(FXCollections.observableArrayList(
+                ramSvc.buscarTodos().stream()
+                    .filter(ram -> compat.compativel(placaMae, ram))
+                    .toList()
+            ));
+            lvMemorias.getSelectionModel().clearSelection();
+
+            cbSSD.setItems(FXCollections.observableArrayList(
+                ssdSvc.buscarTodos().stream()
+                    .filter(ssd -> compat.compativel(placaMae, ssd))
+                    .toList()
+            ));
+            cbSSD.getSelectionModel().clearSelection();
+
+            setAlerta("");
+            atualizarResumo();
+        }
+    }
+
+    @FXML
+    private void onAdicionarMemoria() {
+        MemoriaRAM ram = lvMemorias.getSelectionModel().getSelectedItem();
+        if (ram != null && spQuantidadeMemoria != null) {
+            memoriaSelecionada.put(ram, spQuantidadeMemoria.getValue());
+            atualizarResumo();
+        }
+    }
+
+    @FXML
+    private void onAdicionarCooler() {
+        Cooler cooler = lvCoolers.getSelectionModel().getSelectedItem();
+        if (cooler != null && spQuantidadeCooler != null) {
+            coolerSelecionado.put(cooler, spQuantidadeCooler.getValue());
+            atualizarResumo();
+        }
     }
 
     @FXML
     private void onMontar() {
-        ComputadorBuilder b = new ComputadorBuilder()
-            .adicionarFonte(cbFonte.getValue())
-            .adicionarPlacaMae(cbPlacaMae.getValue())
-            .adicionarProcessador(cbProcessador.getValue())
-            .adicionarGabinete(cbGabinete.getValue())
-            .adicionarSSD(cbSSD.getValue());
+        try {
+            ComputadorBuilder b = new ComputadorBuilder()
+                .adicionarFonte(cbFonte.getValue())
+                .adicionarPlacaMae(cbPlacaMae.getValue())
+                .adicionarProcessador(cbProcessador.getValue())
+                .adicionarGabinete(cbGabinete.getValue())
+                .adicionarSSD(cbSSD.getValue());
 
-        if (cbPlacaVideo.getValue() != null)
-            b.adicionarPlacaDeVideo(cbPlacaVideo.getValue());
+            if (cbPlacaVideo.getValue() != null)
+                b.adicionarPlacaDeVideo(cbPlacaVideo.getValue());
 
-        lvCoolers.getSelectionModel().getSelectedItems()
-                 .forEach(b::adicionarCooler);
-        lvMemorias.getSelectionModel().getSelectedItems()
-                  .forEach(b::adicionarMemoriaRAM);
+            lvCoolers.getSelectionModel().getSelectedItems().forEach(b::adicionarCooler);
+            lvMemorias.getSelectionModel().getSelectedItems().forEach(b::adicionarMemoriaRAM);
 
-        Computador pc = b.build();
-        showResumo(pc);
+            Computador pc = b.build();
+            atualizarResumo(pc);
+            lbPrecoTotal.setText(String.format("Preço total: R$ %.2f", pc.getPrecoTotal() / 100.0));
+            setAlertaSucesso("PC montado com sucesso!");
+        } catch (Exception ex) {
+            setAlertaErro("Complete todas as etapas obrigatórias!");
+        }
     }
+
+    private void setAlertaSucesso(String texto) {
+        lbAlertaCompatibilidade.setText(texto);
+        lbAlertaCompatibilidade.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+    }
+
+    private void setAlertaErro(String texto) {
+        lbAlertaCompatibilidade.setText(texto);
+        lbAlertaCompatibilidade.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+    }
+
 
     @FXML
     private void onLimpar() {
-        cbFonte.getSelectionModel().clearSelection();
-        cbPlacaMae.getSelectionModel().clearSelection();
-        cbPlacaVideo.getSelectionModel().clearSelection();
         cbProcessador.getSelectionModel().clearSelection();
-        cbGabinete.getSelectionModel().clearSelection();
-        cbSSD.getSelectionModel().clearSelection();
-        lvCoolers.getSelectionModel().clearSelection();
+        cbPlacaMae.getSelectionModel().clearSelection();
         lvMemorias.getSelectionModel().clearSelection();
-        taResumo.clear();
+        cbPlacaVideo.getSelectionModel().clearSelection();
+        cbSSD.getSelectionModel().clearSelection();
+        cbGabinete.getSelectionModel().clearSelection();
+        cbFonte.getSelectionModel().clearSelection();
+        lvCoolers.getSelectionModel().clearSelection();
+        resumoList.clear();
+        lbPrecoTotal.setText("");
+        setAlerta("");
+        cbPlacaMae.setDisable(true);
+        lvMemorias.setDisable(true);
+        cbSSD.setDisable(true);
+
+        memoriaSelecionada.clear();
+        coolerSelecionado.clear();
     }
 
-    private void alertaIncompatibilidade(String titulo, String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(titulo + " incompatível");
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
+    private void setAlerta(String texto) {
+        lbAlertaCompatibilidade.setText(texto);
     }
 
-    private void showResumo(Computador pc) {
-        StringBuilder sb = new StringBuilder()
-            .append("→ Fonte: ").append(pc.getFonte().getNome()).append("\n")
-            .append("→ Placa-Mãe: ").append(pc.getPlacaMae().getNome()).append("\n");
+    private void atualizarResumo() {
+        resumoList.clear();
+        int total = 0;
+
+        if (cbProcessador.getValue() != null) {
+            resumoList.add("Processador: " + cbProcessador.getValue().getNome()
+                + " (R$ " + formatarPreco(cbProcessador.getValue().getPreco()) + ")");
+            total += cbProcessador.getValue().getPreco();
+        }
+        if (cbPlacaMae.getValue() != null) {
+            resumoList.add("Placa-mãe: " + cbPlacaMae.getValue().getNome()
+                + " (R$ " + formatarPreco(cbPlacaMae.getValue().getPreco()) + ")");
+            total += cbPlacaMae.getValue().getPreco();
+        }
+        if (!memoriaSelecionada.isEmpty()) {
+            StringBuilder sb = new StringBuilder("Memória RAM: ");
+            for (Map.Entry<MemoriaRAM, Integer> entry : memoriaSelecionada.entrySet()) {
+                sb.append(entry.getKey().getNome()).append(" x").append(entry.getValue())
+                  .append(" (R$ ").append(formatarPreco(entry.getKey().getPreco())).append("), ");
+                total += entry.getKey().getPreco() * entry.getValue();
+            }
+            resumoList.add(sb.substring(0, sb.length() - 2));
+        }
+        if (cbPlacaVideo.getValue() != null) {
+            resumoList.add("Placa de Vídeo: " + cbPlacaVideo.getValue().getNome()
+                + " (R$ " + formatarPreco(cbPlacaVideo.getValue().getPreco()) + ")");
+            total += cbPlacaVideo.getValue().getPreco();
+        }
+        if (cbSSD.getValue() != null) {
+            resumoList.add("SSD NVMe: " + cbSSD.getValue().getNome()
+                + " (R$ " + formatarPreco(cbSSD.getValue().getPreco()) + ")");
+            total += cbSSD.getValue().getPreco();
+        }
+        if (cbGabinete.getValue() != null) {
+            resumoList.add("Gabinete: " + cbGabinete.getValue().getNome()
+                + " (R$ " + formatarPreco(cbGabinete.getValue().getPreco()) + ")");
+            total += cbGabinete.getValue().getPreco();
+        }
+        if (cbFonte.getValue() != null) {
+            resumoList.add("Fonte: " + cbFonte.getValue().getNome()
+                + " (R$ " + formatarPreco(cbFonte.getValue().getPreco()) + ")");
+            total += cbFonte.getValue().getPreco();
+        }
+        if (!coolerSelecionado.isEmpty()) {
+            StringBuilder sb = new StringBuilder("Coolers: ");
+            for (Map.Entry<Cooler, Integer> entry : coolerSelecionado.entrySet()) {
+                sb.append(entry.getKey().getNome()).append(" x").append(entry.getValue())
+                  .append(" (R$ ").append(formatarPreco(entry.getKey().getPreco())).append("), ");
+                total += entry.getKey().getPreco() * entry.getValue();
+            }
+            resumoList.add(sb.substring(0, sb.length() - 2));
+        }
+
+        if (total > 0) {
+            lbPrecoTotal.setText("Preço parcial: R$ " + formatarPreco(total));
+        } else {
+            lbPrecoTotal.setText("");
+        }
+    }
+
+    private void atualizarResumo(Computador pc) {
+        resumoList.clear();
+        resumoList.add("→ Fonte: " + pc.getFonte().getNome() + " (R$ " + formatarPreco(pc.getFonte().getPreco()) + ")");
+        resumoList.add("→ Placa-Mãe: " + pc.getPlacaMae().getNome() + " (R$ " + formatarPreco(pc.getPlacaMae().getPreco()) + ")");
         if (pc.getPlacaDeVideo() != null)
-            sb.append("→ Vídeo: ").append(pc.getPlacaDeVideo().getNome()).append("\n");
-        sb.append("→ Processador: ").append(pc.getProcessador().getNome()).append("\n")
-          .append("→ Gabinete: ").append(pc.getGabinete().getNome()).append("\n")
-          .append("→ SSD: ").append(pc.getSSD() != null ? pc.getSSD().getNome() : "Nenhum").append("\n")
-          .append("→ Coolers: ");
-        pc.getCoolers().forEach(c -> sb.append(c.getNome()).append(", "));
-        sb.append("\n→ RAM: ");
-        pc.getMemoriasRAM().forEach(m -> sb.append(m.getNome()).append(", "));
-        sb.append(String.format("\n\nPreço total: R$ %.2f", pc.getPrecoTotal() / 100.0));
-        taResumo.setText(sb.toString());
+            resumoList.add("→ Vídeo: " + pc.getPlacaDeVideo().getNome() + " (R$ " + formatarPreco(pc.getPlacaDeVideo().getPreco()) + ")");
+        resumoList.add("→ Processador: " + pc.getProcessador().getNome() + " (R$ " + formatarPreco(pc.getProcessador().getPreco()) + ")");
+        resumoList.add("→ Gabinete: " + pc.getGabinete().getNome() + " (R$ " + formatarPreco(pc.getGabinete().getPreco()) + ")");
+        resumoList.add("→ SSD: " + (pc.getSSD() != null ? pc.getSSD().getNome() + " (R$ " + formatarPreco(pc.getSSD().getPreco()) + ")" : "Nenhum"));
+        Map<String, Long> rams = pc.getMemoriasRAM().stream()
+                .collect(java.util.stream.Collectors.groupingBy(MemoriaRAM::getNome, java.util.stream.Collectors.counting()));
+        Map<String, Long> cools = pc.getCoolers().stream()
+                .collect(java.util.stream.Collectors.groupingBy(Cooler::getNome, java.util.stream.Collectors.counting()));
+        resumoList.add("→ RAM: " + (rams.isEmpty() ? "Nenhum" :
+                rams.entrySet().stream().map(e -> e.getKey() + " x" + e.getValue()).reduce((a,b)->a+", "+b).orElse("")));
+        resumoList.add("→ Coolers: " + (cools.isEmpty() ? "Nenhum" :
+                cools.entrySet().stream().map(e -> e.getKey() + " x" + e.getValue()).reduce((a,b)->a+", "+b).orElse("")));
     }
 }
