@@ -3,7 +3,7 @@
 Este projeto é uma aplicação Java que permite que um **cliente monte seu próprio computador** escolhendo peças compatíveis, enquanto a **loja pode cadastrar novos componentes**.
 
 
-## Diagrama UML do projeto (desatualizado):
+## Diagrama UML do projeto:
 
 ![Diagrama UML do projeto](assets/uml.png)
 
