@@ -1,4 +1,9 @@
-package pcbuilder.components;
+package pcbuilder.compatibility;
+
+import pcbuilder.components.MemoriaRAM;
+import pcbuilder.components.PlacaMae;
+import pcbuilder.components.Processador;
+import pcbuilder.components.SSDNVME;
 
 public class Compativel {
     public boolean compativel(Processador processador, PlacaMae placaMae){

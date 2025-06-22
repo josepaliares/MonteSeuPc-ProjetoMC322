@@ -9,7 +9,7 @@ import pcbuilder.components.*;
 public class Usuario {
     private String username;
     private String email;
-    private String senha; // emai e senha podem ser uma interface login se quiserem
+    private String senha; // email e senha podem ser uma interface login se quiserem
     private ComputadorBuilder builder;
     private Computador computador;
     private Role role; 

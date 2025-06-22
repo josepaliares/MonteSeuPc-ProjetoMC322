@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import pcbuilder.computador.Computador;
 import pcbuilder.computador.ComputadorBuilder;
+import pcbuilder.compatibility.*;
 import pcbuilder.components.*;
 import pcbuilder.service.*;
 
