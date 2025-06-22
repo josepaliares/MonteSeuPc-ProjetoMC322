@@ -2,6 +2,7 @@ package pcbuilder.usuario;
 
 import pcbuilder.computador.*;
 import pcbuilder.exceptions.ComponentesEssenciaisFaltandoException;
+import pcbuilder.exceptions.ComponentesIncompativeisException;
 import pcbuilder.components.*;
 
 /**
@@ -94,7 +95,7 @@ public class Usuario {
     /**
      * Constroi o Computador após um minímo de peças serem selecionadas
      */
-    public void construirComputador() throws ComponentesEssenciaisFaltandoException { // podemos fazer essa parte throw-ar uma exceção
+    public void construirComputador() throws ComponentesEssenciaisFaltandoException, ComponentesIncompativeisException { // podemos fazer essa parte throw-ar uma exceção
         computador = builder.build();
     }
 

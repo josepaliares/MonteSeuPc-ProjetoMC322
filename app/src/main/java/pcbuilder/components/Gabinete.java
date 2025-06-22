@@ -14,13 +14,24 @@ public class Gabinete extends Componente {
      * @param nome Nome do gabinete.
      * @param preco Preço do gabinete em centavos.
      * @param descricao Descrição do gabinete.
+     * @param marca Marca do gabinete.
      * @param imagePath Caminho da imagem do gabinete.
      * @param largura Largura do gabinete em centímetros.
      * @param altura Altura do gabinete em centímetros.
      * @param profundidade Profundidade do gabinete em centímetros.
+     * @throws IllegalArgumentException Se a largura, altura ou profundidade forem menores ou iguais a zero.
      */
     public Gabinete(String nome, int preco, String descricao, Marca marca, String imagePath, int largura, int altura, int profundidade) {
         super(nome, preco, descricao, marca, imagePath);
+        if (largura <= 0) {
+            throw new IllegalArgumentException("A largura do gabinete deve ser maior que zero.");
+        }
+        if (altura <= 0) {
+            throw new IllegalArgumentException("A altura do gabinete deve ser maior que zero.");
+        }
+        if (profundidade <= 0) {
+            throw new IllegalArgumentException("A profundidade do gabinete deve ser maior que zero.");
+        }
         this.largura = largura;
         this.altura = altura;
         this.profundidade = profundidade;
