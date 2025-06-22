@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ComponenteFactoryTest {
 
+    // Como todos os casos de erro já são testados em outros testes, aqui focamos apenas na criação correta de um componente.
+
     @Test
     void criarProcessador_deveRetornarProcessadorCorreto() {
         Processador proc = ComponenteFactory.criarProcessador(
@@ -16,7 +18,7 @@ class ComponenteFactoryTest {
                     "8 núcleos, 16 threads, até 5.1GHz Turbo",
                     Marca.INTEL,
                     "/images/i7-10700k.png",
-                    "Comet Lake", // !!! Não existe como atributo do processador
+                    "Comet Lake",
                     "LGA1200",
                     8,
                     16
