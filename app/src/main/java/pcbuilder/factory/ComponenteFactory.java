@@ -8,7 +8,7 @@ import pcbuilder.components.*;
  */
 public class ComponenteFactory {
 
-    public static PlacaMae criarPlacaMae(String nome, int preco, String descricao, Marca marca, String imagePath, String socket, String chipset, int ramSlots, int ramSizePerSlot, String ramType, int ssdMaxLength){
+    public static PlacaMae criarPlacaMae(String nome, int preco, String descricao, Marca marca, String imagePath, String socket, String chipset, int ramSlots, int ramSizePerSlot, String ramType, int ssdMaxLength) {
         return new PlacaMae(nome, preco, descricao, marca, imagePath, socket, chipset, ramSlots, ramSizePerSlot, ramType, ssdMaxLength);
     }
 
@@ -34,13 +34,5 @@ public class ComponenteFactory {
 
     public static Processador criarProcessador(String nome, int preco, String descricao, Marca marca, String imagePath, String chipset, String socket, int nucleos, int threads) {
         return new Processador(nome, preco, descricao, marca, imagePath, socket, nucleos, threads);
-    }
-
-    public static SSDNVME criarSSDNVME(String nome, int preco, String descricao, Marca marca, String imagePath, int capacidade, int length){
-        return new SSDNVME(nome, preco, descricao, marca, imagePath, capacidade, length);
-    }
-
-    public static SATA criarSATA(String nome, int preco, String descricao, Marca marca, String imagePath, int capacidade){
-        return new SATA(nome, preco, descricao, marca, imagePath, capacidade);
     }
 }

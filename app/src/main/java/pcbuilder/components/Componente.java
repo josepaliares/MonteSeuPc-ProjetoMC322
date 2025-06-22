@@ -68,5 +68,9 @@ public abstract class Componente {
         return imagePath;
     }
 
+    @Override
+    public String toString() {
+        return getNome();
+    }
     // Métodos setters para modificar os atributos do componente
 }

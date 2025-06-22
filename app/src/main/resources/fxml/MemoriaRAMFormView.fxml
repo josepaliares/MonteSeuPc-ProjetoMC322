@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pcbuilder.ui.MemoriaRAMFormController"
+          hgap="8" vgap="8" style="-fx-padding:10;">
+
+    <!-- Nome-->      
+        <Label text="Nome:"              GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfNome"         GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <!-- Preço -->
+    <Label text="Preço (R$):"     GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfPreco"       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <!-- Descrição -->
+    <Label text="Descrição:"         GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfDesc"        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <!-- Marca -->
+    <Label text="Marca:"            GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <ChoiceBox fx:id="cbMarca"      GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <!-- Capacidade (GB) -->
+    <Label text="Capacidade (GB):"   GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfCapacidade"  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <!-- Frequência (MHz) -->
+    <Label text="Frequência (MHz):"  GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfFrequencia"  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+    <!-- Tipo -->
+    <Label text="Tipo:"              GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="tfTipo"        GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <!-- Botões -->
+    <Button text="Salvar"           onAction="#onSave"
+            GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <Button text="Cancelar"         onAction="#onCancel"
+            GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>

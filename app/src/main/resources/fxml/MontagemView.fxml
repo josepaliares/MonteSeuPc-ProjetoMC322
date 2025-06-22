@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pcbuilder.ui.MontagemController"
+            style="-fx-padding: 20;">
+    <left>
+        <VBox spacing="18" style="-fx-min-width: 330;" alignment="TOP_LEFT">
+            <Label text="Monte seu PC" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            
+            <VBox spacing="6">
+                <Label text="1. Processador"/>
+                <ComboBox fx:id="cbProcessador" onAction="#onProcessadorSelecionado" prefWidth="260"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="2. Placa-mãe"/>
+                <ComboBox fx:id="cbPlacaMae" onAction="#onPlacaMaeSelecionada" prefWidth="260" disable="true"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="3. Memória RAM"/>
+                <HBox spacing="6">
+                    <ListView fx:id="lvMemorias" prefHeight="60" disable="true"/>
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <Label text="Qtd:"/>
+                        <Spinner fx:id="spQuantidadeMemoria" min="1" max="8" initialValue="1" prefWidth="60"/>
+                        <Button text="Adicionar" onAction="#onAdicionarMemoria"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="4. Placa de Vídeo"/>
+                <ComboBox fx:id="cbPlacaVideo" prefWidth="260"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="5. SSD NVMe"/>
+                <ComboBox fx:id="cbSSD" prefWidth="260" disable="true"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="6. Gabinete"/>
+                <ComboBox fx:id="cbGabinete" prefWidth="260"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="7. Fonte"/>
+                <ComboBox fx:id="cbFonte" prefWidth="260"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="8. Coolers"/>
+                <HBox spacing="6">
+                    <ListView fx:id="lvCoolers" prefHeight="60"/>
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <Label text="Qtd:"/>
+                        <Spinner fx:id="spQuantidadeCooler" min="1" max="8" initialValue="1" prefWidth="60"/>
+                        <Button text="Adicionar" onAction="#onAdicionarCooler"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            <Button text="Limpar Tudo" onAction="#onLimpar" style="-fx-background-color: #f4f4f4; -fx-text-fill: #333;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 18; -fx-background-color: #f8f8f8; -fx-border-radius: 10;" alignment="TOP_CENTER">
+            <Label text="Descrição do Componente" style="-fx-font-size: 18px;"/>
+            <TextArea fx:id="taDescricao" editable="false" wrapText="true" prefHeight="80" style="-fx-background-color: #f4f4f4;"/>
+            <Label text="Resumo da Montagem" style="-fx-font-size: 18px;"/>
+            <ListView fx:id="lvResumo" prefHeight="180" />
+            <Label fx:id="lbAlertaCompatibilidade" textFill="red" wrapText="true"/>
+            <Label fx:id="lbPrecoTotal" style="-fx-font-size: 17px;"/>
+            <Button text="Montar PC" onAction="#onMontar" style="-fx-background-color: #4caf50; -fx-text-fill: white;"/>
+        </VBox>
+    </center>
+</BorderPane>

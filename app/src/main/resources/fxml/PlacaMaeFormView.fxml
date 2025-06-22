@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pcbuilder.ui.PlacaMaeFormController"
+          hgap="8" vgap="8" style="-fx-padding:10;">
+
+  <Label text="Nome:"           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfNome"     GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+  <Label text="Preço (R$):"     GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfPreco"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+  <Label text="Descrição:"      GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfDesc"     GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+  <Label text="Marca:"          GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+  <ChoiceBox fx:id="cbMarca"    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+  <Label text="Socket:"        GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfSocket"  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+  <Label text="Chipset:"        GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfChipset"  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+  <Label text="Slots RAM:"      GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfSlots"    GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+  <Label text="Tamanho RAM/Slot:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfRamSizePerSlot" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+  <Label text="Tipo de RAM:"    GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfRamType"  GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+  <Label text="SSD Max Length (mm):" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+  <TextField fx:id="tfSSDMaxLength"  GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+  <Button text="Salvar"         onAction="#onSave"
+          GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+  <Button text="Cancelar"       onAction="#onCancel"
+          GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+</GridPane>

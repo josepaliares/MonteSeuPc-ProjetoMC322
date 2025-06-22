@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="pcbuilder.ui.GabineteFormController"
+          hgap="8" vgap="8" style="-fx-padding:10;">
+
+        <!-- Nome -->
+        <Label text="Nome:"            GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfNome"      GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <!-- Preço -->
+        <Label text="Preço (R$):"  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfPreco"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <!-- Descrição -->
+        <Label text="Descrição:"      GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfDesc"     GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <!-- Marca -->
+        <Label text="Marca:"          GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ChoiceBox fx:id="cbMarca"    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <!-- Altura -->
+        <Label text="Altura (cm):"    GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfAltura"   GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <!-- Largura -->
+        <Label text="Largura (cm):"   GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfLargura"  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        <!-- Profundidade -->
+        <Label text="Profundidade (cm):" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfProfund"   GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+        <!-- Botões -->
+        <Button text="Salvar"         onAction="#onSave"
+                GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <Button text="Cancelar"       onAction="#onCancel"
+                GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pcbuilder.ui.ClientController"
+            prefWidth="800" prefHeight="600">
+
+  <!-- Top: logout e título -->
+  <top>
+    <ToolBar>
+      <Button text="Logout" onAction="#onLogout"/>
+      <Region fx:id="spacer"  BorderPane.alignment="CENTER"/>
+      <Label text="Montagem de PC" style="-fx-font-size:16px;"/>
+    </ToolBar>
+  </top>
+
+  <!-- Center: inclui o formulário de montagem -->
+  <center>
+    <fx:include source="MontagemView.fxml"/>
+  </center>
+
+</BorderPane>
