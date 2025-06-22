@@ -1,6 +1,7 @@
 package pcbuilder.usuario;
 
 import pcbuilder.computador.*;
+import pcbuilder.exceptions.ComponentesEssenciaisFaltandoException;
 import pcbuilder.components.*;
 
 /**
@@ -9,7 +10,7 @@ import pcbuilder.components.*;
 public class Usuario {
     private String username;
     private String email;
-    private String senha; // email e senha podem ser uma interface login se quiserem
+    private String senha; // emai e senha podem ser uma interface login se quiserem
     private ComputadorBuilder builder;
     private Computador computador;
     private Role role; 
@@ -93,7 +94,7 @@ public class Usuario {
     /**
      * Constroi o Computador após um minímo de peças serem selecionadas
      */
-    public void construirComputador(){ // podemos fazer essa parte throw-ar uma exceção
+    public void construirComputador() throws ComponentesEssenciaisFaltandoException { // podemos fazer essa parte throw-ar uma exceção
         computador = builder.build();
     }
 

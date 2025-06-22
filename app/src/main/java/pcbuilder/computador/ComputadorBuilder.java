@@ -1,6 +1,8 @@
 package pcbuilder.computador;
 
 import pcbuilder.components.*;
+import pcbuilder.exceptions.ComponentesEssenciaisFaltandoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +60,9 @@ public class ComputadorBuilder {
         return this;
     }
 
-    public Computador build() {
+    public Computador build() throws ComponentesEssenciaisFaltandoException {
         if (fonte == null || placaMae == null || processador == null || gabinete == null) {
-            throw new IllegalStateException("Faltam componentes obrigatórios para montar o computador.");
+            throw new ComponentesEssenciaisFaltandoException("Faltam componentes obrigatórios para montar o computador.");
         }
         return new Computador(fonte, placaMae, placaDeVideo, processador, coolers, memoriasRAM, gabinete, ssd);
     }
