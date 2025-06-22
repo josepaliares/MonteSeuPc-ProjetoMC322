@@ -20,27 +20,43 @@ A aplicação é dividida logicamente em duas áreas:
 src/
 ├── main/
 │   ├── java/
-│   │   ├── componentes/
-│   │   │   ├── Componente.java
-│   │   │   ├── PlacaMae.java
-│   │   │   ├── Processador.java
-│   │   │   ├── PlacaVideo.java
-│   │   │   ├── MemoriaRAM.java
-│   │   │   ├── Fonte.java
-│   │   │   ├── Cooler.java
-│   │   │   └── Gabinete.java
-│   │   ├── computador/
-│   │   │   ├── Computador.java
-│   │   │   └── ComputadorBuilder.java
-│   │   ├── fabrica/
-│   │   │   └── ComponenteFactory.java
-│   │   ├── usuario/
-│   │   │   ├── Usuario.java
-│   │   └── App.java
-└── test/
+│   │   ├── pcbuilder/
+│   │   │   ├── compatibility/
+│   │   │   │   └── Compativel.java
+│   │   │   ├── components/
+│   │   │   │   │   ├── Componente.java
+│   │   │   │   ├── PlacaMae.java
+│   │   │   │   ├── Processador.java
+│   │   │   │   ├── PlacaVideo.java
+│   │   │   │   ├── MemoriaRAM.java
+│   │   │   │   ├── Marca.java
+│   │   │   │   ├── Fonte.java
+│   │   │   │   ├── Cooler.java
+│   │   │   │   ├── Gabinete.java
+│   │   │   │   ├── SATA.java
+│   │   │   │   └── SSDNVME.java
+│   │   │   ├── computador/
+│   │   │   │   ├── Computador.java
+│   │   │   │   └── ComputadorBuilder.java
+│   │   │   ├── factory/
+│   │   │   │   └── ComponenteFactory.java
+│   │   │   ├── usuario/
+│   │   │   │   ├── Usuario.java
+│   │   │   │   └── Role.java
+│   │   │   ├── exceptions/
+│   │   │   │   ├── ComponentesEssenciaisFaltandoException.java
+│   │   │   │   └── ComponentesIncompatíveisException.java
+│   │   │   ├── ui/
+│   │   │   │   └── [...] // Arquivos da interface
+│   │   │   ├── service/
+│   │   │   │   └── [...] // Inicialização de alguns objetos
+│   └── resources/fxml
+│   │   └── [...] // Arquivos da interface
+└── test/java/pcbuilder
+│   └── [...] // Arquivos de teste
 ```
 
-## 🛠️ Funcionalidades a serem implementadas
+## 🛠️ Funcionalidades implementadas
 
 - Representação de componentes como classes que herdam de `Componente`.
 - Compatibilidade entre peças (ex: socket do processador e placa-mãe).
@@ -52,8 +68,6 @@ src/
 
 - **Builder**: permite construir objetos `Computador` passo a passo.
 - **Factory**: abstrai a criação de diferentes componentes.
-- **Strategy** (futuramente recomendado): pode ser usado para validar compatibilidade entre componentes.
-- **Observer** (futuramente recomendado): para notificar a interface de atualizações (ex: quando uma peça é adicionada ao PC).
 
 ## ▶️ Como Executar
 
