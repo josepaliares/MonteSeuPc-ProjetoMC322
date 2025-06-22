@@ -21,7 +21,7 @@ public class PlacaMae extends Componente {
      * @param ramType; Tipo de RAM suportado (Ex: DDR4, DDR5)
      * @param ssdMaxLength; Comprimento Físico máximo do SSD
      */
-    public PlacaMae(String nome, int preco, String descricao, Marca marca, String imagePath, String socket, String chipset, int ramSlots, int ramSizePerSlot, String ramType, int ssdMaxLength) {
+    public PlacaMae(String nome, int preco, String descricao, Marca marca, String imagePath, String socket, String chipset, int ramSlots, int ramSizePerSlot, String ramType, int ssdMaxLength){
         super(nome, preco, descricao, marca, imagePath);
         this.socket = socket;
         this.chipset = chipset;
