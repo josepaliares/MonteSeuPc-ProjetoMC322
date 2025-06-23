@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class PlacaDeVideoService extends ComponenteService<PlacaDeVideo> {
-    private static final String ARQUIVO = "placas_video.json";
+    private static final String ARQUIVO = "data/placas_video.json";
 
     public PlacaDeVideoService() {
         carregarDeJson();

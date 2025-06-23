@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class SSDNVMEService extends ComponenteService<SSDNVME> {
-    private static final String ARQUIVO = "ssdsnvme.json";
+    private static final String ARQUIVO = "data/ssdsnvme.json";
 
     public SSDNVMEService() {
         carregarDeJson(); 

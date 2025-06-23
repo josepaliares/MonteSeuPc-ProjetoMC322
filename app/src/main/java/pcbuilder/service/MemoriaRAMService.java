@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class MemoriaRAMService extends ComponenteService<MemoriaRAM> {
-    private static final String ARQUIVO = "memorias.json";
+    private static final String ARQUIVO = "data/memorias.json";
 
     public MemoriaRAMService() {
         carregarDeJson();

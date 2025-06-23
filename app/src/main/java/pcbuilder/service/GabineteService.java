@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GabineteService extends ComponenteService<Gabinete> {
-    private static final String ARQUIVO = "gabinetes.json";
+    private static final String ARQUIVO = "data/gabinetes.json";
 
     public GabineteService() {
         carregarDeJson(); 

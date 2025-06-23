@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ProcessadorService extends ComponenteService<Processador> {
-    private static final String ARQUIVO = "processadores.json";
+    private static final String ARQUIVO = "data/processadores.json";
 
     public ProcessadorService() {
         carregarDeJson();

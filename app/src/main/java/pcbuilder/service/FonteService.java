@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FonteService extends ComponenteService<Fonte> {
-    private static final String ARQUIVO = "fontes.json";
+    private static final String ARQUIVO = "data/fontes.json";
 
     public FonteService() {
         carregarDeJson();

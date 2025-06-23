@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class PlacaMaeService extends ComponenteService<PlacaMae> {
-    private static final String ARQUIVO = "placas_mae.json";
+    private static final String ARQUIVO = "data/placas_mae.json";
 
     public PlacaMaeService() {
         carregarDeJson();

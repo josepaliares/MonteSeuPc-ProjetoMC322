@@ -56,7 +56,6 @@
                     </VBox>
                 </HBox>
             </VBox>
-            <Button text="Limpar Tudo" onAction="#onLimpar" style="-fx-background-color: #f4f4f4; -fx-text-fill: #333;"/>
         </VBox>
     </left>
 
@@ -69,6 +68,7 @@
             <Label fx:id="lbAlertaCompatibilidade" textFill="red" wrapText="true"/>
             <Label fx:id="lbPrecoTotal" style="-fx-font-size: 17px;"/>
             <Button text="Montar PC" onAction="#onMontar" style="-fx-background-color: #4caf50; -fx-text-fill: white;"/>
+            <Button text="Limpar Tudo" onAction="#onLimpar" style="-fx-background-color: #f4f4f4; -fx-text-fill: #333;"/>
         </VBox>
     </center>
 </BorderPane>

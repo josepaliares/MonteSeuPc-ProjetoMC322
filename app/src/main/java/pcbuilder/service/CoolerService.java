@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class CoolerService extends ComponenteService<Cooler> {
-    private static final String ARQUIVO = "coolers.json";
+    private static final String ARQUIVO = "data/coolers.json";
 
     public CoolerService() {
         carregarDeJson();
